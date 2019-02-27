@@ -16,13 +16,13 @@ enum TriggerState {
   AWAIT_NEXT_READ
 };
 
-// greater than 10 seconds, reset the timer.
+// if the wheel takes longer than this to turn, consider
+// the reading invalid and go back to awaiting the initial
+// reading.
 const unsigned long maximumAllowableIntervalMillis = 5000;
 
-// at least 200 millis of continuous
-// zero reading before it can be considered properly zero.
-// this is because the sensor sometimes triggers
-// as the magnet is being pulled away.
+// minimum time to wait after a reading before the next
+// positive reading can be taken.
 const unsigned long relaxationTimeMillis = 20;
 
 class TriggerIntervalTracker {
