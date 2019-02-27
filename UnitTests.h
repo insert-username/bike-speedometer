@@ -37,7 +37,7 @@ class UnitTests {
   private:
     BikeDisplay* bikeDisplay = new MockBikeDisplay();
     
-    PinReader* pinReader = new MockPinReader();
+    MockPinReader* pinReader = new MockPinReader();
     
     TriggerIntervalTracker triggerIntervalTracker;
 
@@ -53,19 +53,32 @@ class UnitTests {
       Serial.println();
       
       UnitTests().testStartsAwaitingInitialReading();
+      UnitTests().testStillAwaitingInitialReadingAfterSensorReadsLow();
     }
 
     void testStartsAwaitingInitialReading() {
       TriggerState state = triggerIntervalTracker.getState();
 
       if (state == AWAIT_INITIAL_READ) {
-        Serial.println("OK:   testStartsAwaitingInitialReading");
+        Serial.println("PASS:    testStartsAwaitingInitialReading");
       } else {
-        Serial.print("FAIL: testStartsAwaitingInitialReading: ");
+        Serial.print("FAIL:    testStartsAwaitingInitialReading: ");
         Serial.println(state);
       }
     }
-  
+
+    void testStillAwaitingInitialReadingAfterSensorReadsLow() {
+      pinReader->setValue(LOW);
+      triggerIntervalTracker.update();
+
+      TriggerState state = triggerIntervalTracker.getState();
+      if (state == AWAIT_INITIAL_READ) {
+        Serial.println("PASS:    testStillAwaitingInitialReadingAfterSensorReadsLow");
+      } else {
+        Serial.print("FAIL:    testStartsAwaitingInitialReading: ");
+        Serial.println(state);
+      }
+    }
 };
 
 #endif
