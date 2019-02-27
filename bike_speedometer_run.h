@@ -6,7 +6,7 @@
 #include "TriggerIntervalTracker.h"
 
 BikeDisplay* bikeDisplay = new DefaultBikeDisplay();
-PinReader* hallPinReader = new DigitalPinReader(3);
+PinReader* hallPinReader = new DigitalPinReader(HALL_SENSOR_PIN);
 
 TriggerIntervalTracker triggerIntervalTracker(bikeDisplay, hallPinReader);
 
