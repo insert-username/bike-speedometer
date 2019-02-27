@@ -1,7 +1,11 @@
 #ifndef BIKESPEEDOMETERRUN
 #define BIKESPEEDOMETERRUN
 
-BikeDisplay* bikeDisplay = new BikeDisplay();
+#include "PinReader.h"
+#include "BikeDisplay.h"
+#include "TriggerIntervalTracker.h"
+
+BikeDisplay* bikeDisplay = new DefaultBikeDisplay();
 PinReader* hallPinReader = new DigitalPinReader(3);
 
 TriggerIntervalTracker triggerIntervalTracker(bikeDisplay, hallPinReader);

@@ -1,6 +1,3 @@
-#include "TriggerIntervalTracker.h"
-#include "PinReader.h"
-
 // Uncomment to run test suite instead of
 // standard operations
 //#define PERFORM_UNIT_TESTS

@@ -5,7 +5,7 @@
 
 void setup() {
   Serial.begin(9600);
-  UnitTests().run();
+  UnitTests::run();
 }
 
 void loop() {

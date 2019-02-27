@@ -48,6 +48,10 @@ class TriggerIntervalTracker {
       
     }
 
+    TriggerState getState() {
+      return triggerState;
+    }
+
     void update() {
       int sensorValue = pinReader->readPin();
 
