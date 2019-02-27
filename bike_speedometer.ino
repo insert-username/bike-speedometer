@@ -1,18 +1,16 @@
-#define HALL_PIN 3
 #include "TriggerIntervalTracker.h"
 #include "PinReader.h"
 
-BikeDisplay* bikeDisplay = new BikeDisplay();
-PinReader* hallPinReader = new DigitalPinReader(HALL_PIN);
+// Uncomment to run test suite instead of
+// standard operations
+//#define PERFORM_UNIT_TESTS
 
-TriggerIntervalTracker triggerIntervalTracker(bikeDisplay, hallPinReader);
+#ifdef PERFORM_UNIT_TESTS
 
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-}
+  #include "bike_speedometer_unit_test.h"
 
+#else
 
-void loop() {
-  triggerIntervalTracker.update();
-}
+  #include "bike_speedometer_run.h"
+
+#endif
