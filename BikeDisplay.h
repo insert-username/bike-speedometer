@@ -1,3 +1,5 @@
+#ifndef BIKEDISPLAY
+#define BIKEDISPLAY
 
 class BikeDisplay {
 
@@ -9,3 +11,5 @@ class BikeDisplay {
       Serial.println(sensorInterval / 1000.0);
     }
 };
+
+#endif

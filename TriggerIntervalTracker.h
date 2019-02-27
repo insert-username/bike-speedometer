@@ -1,3 +1,6 @@
+#ifndef TRIGGERINTERVALTRACKER
+#define TRIGGERINTERVALTRACKER
+
 #include "BikeDisplay.h"
 
 enum TriggerState {
@@ -117,3 +120,5 @@ class TriggerIntervalTracker {
         }
       }
 };
+
+#endif
