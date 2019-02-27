@@ -2,6 +2,7 @@
 #define TRIGGERINTERVALTRACKER
 
 #include "BikeDisplay.h"
+#include "PinReader.h"
 
 enum TriggerState {
 
@@ -27,10 +28,10 @@ const unsigned long relaxationTimeMillis = 20;
 class TriggerIntervalTracker {
   private:
     TriggerState triggerState = AWAIT_INITIAL_READ;
-  
-    int sensorPin;
 
-    BikeDisplay bikeDisplay;
+    BikeDisplay* bikeDisplay;
+
+    PinReader* pinReader;
 
     unsigned long t0;
 
@@ -39,16 +40,16 @@ class TriggerIntervalTracker {
     int lastSensorRead;
 
   public:
-    TriggerIntervalTracker(int sensorPin, BikeDisplay bikeDisplay) : sensorPin(sensorPin) {
+    TriggerIntervalTracker(
+      BikeDisplay* bikeDisplay,
+      PinReader* pinReader) : 
+        bikeDisplay(bikeDisplay),
+        pinReader(pinReader){
       
-    }
-    
-    void setup() {
-      pinMode(sensorPin, INPUT);
     }
 
     void update() {
-      int sensorValue = digitalRead(HALL_PIN);
+      int sensorValue = pinReader->readPin();
 
       if (triggerState == AWAIT_INITIAL_READ) {
         readInitialSensorValue(sensorValue);
@@ -109,7 +110,7 @@ class TriggerIntervalTracker {
       
         if (sensorValue == 1) {
           updateTriggerState(UNDERGOING_READ);
-          bikeDisplay.updateSpeedReading(interval);
+          bikeDisplay->updateSpeedReading(interval);
           t0_relax = t1;
           t0 = t1;
         } else if (interval > maximumAllowableIntervalMillis) {

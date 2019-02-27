@@ -1,9 +1,11 @@
 #define HALL_PIN 3
 #include "TriggerIntervalTracker.h"
+#include "PinReader.h"
 
-BikeDisplay bikeDisplay;
+BikeDisplay* bikeDisplay = new BikeDisplay();
+PinReader* hallPinReader = new DigitalPinReader(HALL_PIN);
 
-TriggerIntervalTracker triggerIntervalTracker(HALL_PIN, bikeDisplay);
+TriggerIntervalTracker triggerIntervalTracker(bikeDisplay, hallPinReader);
 
 void setup() {
   // put your setup code here, to run once:
