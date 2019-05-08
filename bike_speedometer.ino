@@ -9,7 +9,7 @@
 #else
 
   // digital read pin for hall effect sensor.
-  #define HALL_SENSOR_PIN 3
+  #define HALL_SENSOR_PIN 10
 
   #include "bike_speedometer_run.h"
 
