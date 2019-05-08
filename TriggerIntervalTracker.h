@@ -64,6 +64,8 @@ class TriggerIntervalTracker {
       }
     
       lastSensorRead = sensorValue;
+
+      bikeDisplay->render();
     }
 
   private:
@@ -121,6 +123,7 @@ class TriggerIntervalTracker {
           Serial.println("Too long since last sensor read, resetting to require initial read.");
           Serial.println(interval);
           Serial.println(maximumAllowableIntervalMillis);
+          bikeDisplay->updateSpeedReading(0);
           updateTriggerState(AWAIT_INITIAL_READ);
         }
       }

@@ -30,6 +30,10 @@ class MockBikeDisplay : public BikeDisplay {
     void updateSpeedReading(long sensorInterval) {
       // do nothing.
     }
+
+    void render() {
+      // do nothing.
+    }
 };
 
 class UnitTests {
