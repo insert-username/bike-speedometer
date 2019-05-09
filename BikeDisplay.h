@@ -42,7 +42,7 @@ class SevenSegmentBikeDisplay : public BikeDisplay {
 
   long sensorInterval = 0;
 
-  void renderDigit(int digit, int value) {
+  void renderDigit(int digit, int value, bool shouldRenderDP) {
       digit1Enable->writePin(LOW);
       digit2Enable->writePin(LOW);
       digit3Enable->writePin(LOW);
@@ -50,7 +50,7 @@ class SevenSegmentBikeDisplay : public BikeDisplay {
       // note, this should be rendered BEFORE enabling the
       // digit pin, otherwise you'll get "ghosting" of the
       // previously rendered digit.
-      sevenSegmentPinWriter->renderDigit(value, false);
+      sevenSegmentPinWriter->renderDigit(value, shouldRenderDP);
 
       digit1Enable->writePin(digit == 1 ? HIGH : LOW);
       digit2Enable->writePin(digit == 2 ? HIGH : LOW);
@@ -76,9 +76,9 @@ class SevenSegmentBikeDisplay : public BikeDisplay {
 
     // calling render for each digit, even when they are not necessarily
     // displayed, will ensure a consistent render time.
-    renderDigit(1, firstDigit != 0 ? firstDigit: -1);
-    renderDigit(2, (secondDigit != 0 || firstDigit != 0) ? secondDigit : -1);
-    renderDigit(3, thirdDigit);
+    renderDigit(1, firstDigit != 0 ? firstDigit: -1, false);
+    renderDigit(2, (secondDigit != 0 || firstDigit != 0) ? secondDigit : -1, false);
+    renderDigit(3, thirdDigit, false);
   }
 
   public:
